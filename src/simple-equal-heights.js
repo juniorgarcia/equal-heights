@@ -49,7 +49,7 @@
 
   // Initialising on DOM load
   (document.readyState === 'complete' && matchHeight.init()) ||
-    document.addEventListener('DOMContentLoaded', matchHeight.init);
+    document.addEventListener('DOMContentLoaded', matchHeight.init.bind(matchHeight));
 
   return matchHeight;
 })();
