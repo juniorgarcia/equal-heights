@@ -27,7 +27,8 @@ export default {
     file: shouldMinify
       ? 'build/simple-equal-heights.min.js'
       : 'build/simple-equal-heights.js',
-    format: 'iife'
+    name: 'matchHeight',
+    format: 'umd'
   },
   plugins
 };
