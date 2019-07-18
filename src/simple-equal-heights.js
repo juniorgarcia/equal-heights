@@ -25,8 +25,9 @@ export default {
   },
   /**
    * @param {string} onlyForSelector A selector to match the height only for this given container
+   * @param {bool} force Tells if the height should be updated even for items that already had their heights calculated
    */
-  match: function(onlyForSelector = '') {
+  match: function(onlyForSelector = '', force = true) {
     var groupName = Array.prototype.slice.call(
         document.querySelectorAll(onlyForSelector + ' [data-match-height]')
       ),
@@ -37,8 +38,15 @@ export default {
       item.style.minHeight = 'auto';
 
       if (groupHeights.hasOwnProperty(data)) {
+        var itemHeight = item.offsetHeight;
+
+        if (force) {
+          item.style.height = 'auto';
+          itemHeight = item.offsetHeight;
+        }
+
         Object.defineProperty(groupHeights, data, {
-          value: Math.max(groupHeights[data], item.offsetHeight),
+          value: Math.max(groupHeights[data], itemHeight),
           configurable: true,
           writable: true,
           enumerable: true
